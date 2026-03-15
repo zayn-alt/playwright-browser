@@ -1,12 +1,15 @@
-const { chromium } = require('playwright');
+const { chromium } = require('playwright-core');
 const http = require('http');
 
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(async (req, res) => {
-  if (req.method === 'GET' && req.url === '/visit') {
+  if (req.url === '/visit') {
     try {
-      const browser = await chromium.launch({ headless: true });
+      const browser = await chromium.launch({
+        headless: true,
+        executablePath: process.env.CHROMIUM_PATH || '/usr/bin/chromium'
+      });
       const page = await browser.newPage();
       await page.goto('https://example.com');
       const title = await page.title();
@@ -23,6 +26,4 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-server.listen(PORT, () => {
-  console.log('Server running on port ' + PORT);
-});
+server.listen(PORT, () => console.log('Server running on port ' + PORT));

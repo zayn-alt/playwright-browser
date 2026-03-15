@@ -1,12 +1,8 @@
 {
   "name": "playwright-browser",
   "version": "1.0.0",
-  "description": "Headless browser automation with Playwright",
   "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
   "dependencies": {
-    "playwright": "^1.40.0"
+    "playwright-core": "^1.40.0"
   }
 }
