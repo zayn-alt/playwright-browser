@@ -1,5 +1,7 @@
 FROM node:20-slim
 
+# cache-bust: 1
+
 RUN apt-get update && apt-get install -y \
     chromium \
     --no-install-recommends \
