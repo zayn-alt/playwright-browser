@@ -12,6 +12,9 @@ async function visitPage() {
       args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
     const page = await browser.newPage();
+    await page.setExtraHTTPHeaders({
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    });
     await page.goto(TARGET_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
     const title = await page.title();
     console.log('Visited! Title: ' + title);
@@ -25,7 +28,7 @@ visitPage();
 
 const server = http.createServer((req, res) => {
   res.writeHead(200);
-  res.end('Playwright server is running\n');
+  res.end('OK\n');
 });
 
 server.listen(PORT, () => console.log('Server running on port ' + PORT));
