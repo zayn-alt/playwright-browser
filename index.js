@@ -25,7 +25,7 @@ visitPage();
 
 const server = http.createServer((req, res) => {
   res.writeHead(200);
-  res.end('Playwright server is running');
+  res.end('Playwright server is running\n');
 });
 
 server.listen(PORT, () => console.log('Server running on port ' + PORT));
