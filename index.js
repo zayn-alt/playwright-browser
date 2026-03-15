@@ -9,10 +9,11 @@ const server = http.createServer(async (req, res) => {
     try {
       const browser = await chromium.launch({
         headless: true,
-        executablePath: process.env.CHROMIUM_PATH || '/usr/bin/chromium'
+        executablePath: process.env.CHROMIUM_PATH || '/usr/bin/chromium',
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
       });
       const page = await browser.newPage();
-      await page.goto(TARGET_URL, { waitUntil: 'networkidle' });
+      await page.goto(TARGET_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
       const title = await page.title();
       await browser.close();
       res.writeHead(200);
